@@ -1,0 +1,62 @@
+// 1. Switch to the database
+use ToDoList_DB
+
+// 2. Create the 'tasks' collection
+db.createCollection("tasks")
+
+// 3. Insert sample tasks into the 'tasks' collection
+db.tasks.insertMany([
+  {
+    task_id: 1,
+    task_name: "Buy groceries",
+    description: "Milk, Bread, Eggs, Fruits",
+    status: "pending",
+    due_date: new Date("2025-06-12")
+  },
+  {
+    task_id: 2,
+    task_name: "Complete assignment",
+    description: "Submit Express.js assignment",
+    status: "in-progress",
+    due_date: new Date("2025-06-14")
+  },
+  {
+    task_id: 3,
+    task_name: "Workout",
+    description: "1 hour gym session",
+    status: "completed",
+    due_date: new Date("2025-06-10")
+  },
+  {
+    task_id: 4,
+    task_name: "Call mom",
+    description: "Weekly call",
+    status: "pending",
+    due_date: new Date("2025-06-13")
+  },
+  {
+    task_id: 5,
+    task_name: "Read a book",
+    description: "Read 30 pages of a novel",
+    status: "in-progress",
+    due_date: new Date("2025-06-18")
+  }
+])
+
+// 4. Retrieve all tasks
+db.tasks.find()
+
+// 5. Retrieve tasks where status is 'pending'
+db.tasks.find({ status: "pending" })
+
+// 6. Retrieve tasks with due_date in the next 7 days
+const today = new Date()
+const next7days = new Date()
+next7days.setDate(today.getDate() + 7)
+
+db.tasks.find({
+  due_date: {
+    $gte: today,
+    $lte: next7days
+  }
+})

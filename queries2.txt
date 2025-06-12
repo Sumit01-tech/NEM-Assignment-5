@@ -1,0 +1,52 @@
+// Q8 - Book Library Management MongoDB
+
+use Library_DB
+
+db.createCollection("books")
+
+db.books.insertMany([
+  {
+    book_id: 1,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    genre: "fiction",
+    available: true
+  },
+  {
+    book_id: 2,
+    title: "Sapiens",
+    author: "Yuval Noah Harari",
+    genre: "non-fiction",
+    available: true
+  },
+  {
+    book_id: 3,
+    title: "The Silent Patient",
+    author: "Alex Michaelides",
+    genre: "thriller",
+    available: false
+  },
+  {
+    book_id: 4,
+    title: "1984",
+    author: "George Orwell",
+    genre: "fiction",
+    available: false
+  },
+  {
+    book_id: 5,
+    title: "Atomic Habits",
+    author: "James Clear",
+    genre: "non-fiction",
+    available: true
+  }
+])
+
+// Retrieve all books
+db.books.find()
+
+// Retrieve books by genre (fiction)
+db.books.find({ genre: "fiction" })
+
+// Retrieve only available books
+db.books.find({ available: true })
